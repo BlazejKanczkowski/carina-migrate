@@ -1,26 +1,43 @@
-target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
-
-### IntelliJ IDEA ###
-.idea/modules.xml
-.idea/jarRepositories.xml
-.idea/compiler.xml
-.idea/libraries/
-*.iws
+# IntelliJ IDEA
+.idea/
+!.idea/codeStyles
+!.idea/inspectionProfiles
+!.idea/compiler.xml
 *.iml
-*.ipr
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
-
-### Mac OS ###
 .DS_Store
+Thumbs.db
+
+# Maven
+/target/
+/reports/
+/*.log
+
+# TestNG reports
+test-output/
+surefire-reports/
+
+# Screenshots and HTML reports
+**/*.png
+**/report.html
+**/emailable-report.html
+**/index.html
+
+*.log
+
+*.tmp
+*.swp
+
+ehthumbs.db
+Icon?
+desktop.ini
+
+*~
+
+*.class
+
+.idea/workspace.xml
+.idea/vcs.xml
+.idea/encodings.xml
+.idea/misc.xml
+.idea/modules.xml
