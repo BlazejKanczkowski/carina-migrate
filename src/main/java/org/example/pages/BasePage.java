@@ -1,7 +1,7 @@
 package org.example.pages;
+
 import com.zebrunner.carina.webdriver.gui.AbstractPage;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
 
 public abstract class BasePage extends AbstractPage {
 

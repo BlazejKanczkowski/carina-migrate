@@ -1,4 +1,5 @@
 package org.example.enums;
+
 //Used only one for testing
 public enum SortOption {
     NAME_A_TO_Z("Name (A to Z)"),

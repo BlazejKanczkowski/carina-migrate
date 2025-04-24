@@ -1,5 +1,6 @@
 package tests;
 
+import org.example.enums.UserCredentials;
 import org.example.pages.CartPage;
 import org.example.pages.CheckoutPage;
 import org.example.pages.InventoryPage;
@@ -14,8 +15,9 @@ public class CheckoutTest extends BaseTest {
         LoginPage loginPage = new LoginPage(getDriver());
         loginPage.open();
 
-        InventoryPage inventoryPage = loginPage.login("standard_user", "secret_sauce");
-
+        InventoryPage inventoryPage = loginPage.login(UserCredentials.STANDARD_USER.getUsername(),
+                UserCredentials.STANDARD_USER.getPassword()
+        );
         Assert.assertTrue(inventoryPage.isPageDisplayed(), "Inventory page should be visible");
 
         inventoryPage.addProductToCartByName("Sauce Labs Backpack");

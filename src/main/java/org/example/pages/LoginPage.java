@@ -23,6 +23,7 @@ public class LoginPage extends BasePage {
     public LoginPage(WebDriver driver) {
         super(driver);
     }
+
     public InventoryPage login(UserCredentials user) {
         return login(user.getUsername(), user.getPassword());
     }

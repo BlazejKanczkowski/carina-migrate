@@ -3,16 +3,14 @@ package org.example.pages;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import org.example.components.ProductListItemComponent;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 
 import java.time.Duration;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import org.example.enums.SortOption;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class InventoryPage extends BasePage {
 
@@ -34,8 +32,9 @@ public class InventoryPage extends BasePage {
     @FindBy(className = "product_sort_container")
     private ExtendedWebElement sortDropdown;
 
-    @FindBy(className = "inventory_item")
+    @FindBy(css = "[data-test='inventory-item']")
     private List<ProductListItemComponent> productItems;
+
 
     public InventoryPage(WebDriver driver) {
         super(driver);
@@ -46,12 +45,9 @@ public class InventoryPage extends BasePage {
     }
 
     public List<Double> getDisplayedPrices() {
-        List<Double> prices = new ArrayList<>();
-        for (ProductListItemComponent product : productItems) {
-            String priceText = product.getItemPrice().replace("$", "");
-            prices.add(Double.parseDouble(priceText));
-        }
-        return prices;
+        return productItems.stream()
+                .map(ProductListItemComponent::getItemPrice)
+                .collect(Collectors.toList());
     }
 
     public CartPage clickCartIcon() {

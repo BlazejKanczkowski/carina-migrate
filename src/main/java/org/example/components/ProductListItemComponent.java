@@ -25,8 +25,8 @@ public class ProductListItemComponent extends AbstractUIObject {
         return itemName.getText();
     }
 
-    public String getItemPrice() {
-        return price.getText();
+    public double getItemPrice() {
+        return Double.parseDouble(price.getText().replace("$", "").trim());
     }
 
     public void clickAddToCart() {

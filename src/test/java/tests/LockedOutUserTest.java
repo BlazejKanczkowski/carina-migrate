@@ -1,7 +1,6 @@
 package tests;
 
 import org.example.enums.UserCredentials;
-import org.example.pages.InventoryPage;
 import org.example.pages.LoginPage;
 import org.testng.Assert;
 import org.testng.annotations.*;
