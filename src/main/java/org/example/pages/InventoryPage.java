@@ -1,5 +1,6 @@
 package org.example.pages;
 
+import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import org.example.components.ProductListItemComponent;
 import org.openqa.selenium.WebDriver;
@@ -9,8 +10,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.time.Duration;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import org.example.enums.SortOption;
+
 
 public class InventoryPage extends BasePage {
 

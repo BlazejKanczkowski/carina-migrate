@@ -5,6 +5,7 @@ import org.example.pages.InventoryPage;
 import org.example.pages.LoginPage;
 import org.testng.Assert;
 import org.testng.annotations.*;
+import org.example.services.LoginService;
 
 import java.util.List;
 
@@ -12,12 +13,9 @@ public class AddMultipleItemsTest extends BaseTest {
 
     @Test
     public void testAddMultipleProductsToCart() {
-        LoginPage loginPage = new LoginPage(getDriver());
-        loginPage.open();
 
-        InventoryPage inventoryPage = loginPage.login(UserCredentials.STANDARD_USER.getUsername(),
-                UserCredentials.STANDARD_USER.getPassword()
-        );
+        InventoryPage inventoryPage = new LoginService(getDriver()).loginAs(UserCredentials.STANDARD_USER);
+
         Assert.assertTrue(inventoryPage.isPageDisplayed(), "Inventory page should be visible after login");
 
         inventoryPage.addProductsToCart(List.of("Sauce Labs Backpack", "Sauce Labs Bike Light"));

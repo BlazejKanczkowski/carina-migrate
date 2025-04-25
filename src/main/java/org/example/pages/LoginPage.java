@@ -1,5 +1,6 @@
 package org.example.pages;
 
+import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import org.example.enums.UserCredentials;
 import org.openqa.selenium.WebDriver;

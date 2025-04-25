@@ -9,9 +9,9 @@ public class LockedOutUserTest extends BaseTest {
 
     @Test
     public void testLoginWithLockedOutUser() {
+
         LoginPage loginPage = new LoginPage(getDriver());
         loginPage.open();
-
         loginPage.login(UserCredentials.LOCKED_OUT_USER);
 
         Assert.assertTrue(loginPage.isErrorMessageDisplayed(), "Error message should be displayed");

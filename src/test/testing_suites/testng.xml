@@ -26,5 +26,4 @@
             <class name="tests.SortProductsTest"/>
         </classes>
     </test>
-
 </suite>

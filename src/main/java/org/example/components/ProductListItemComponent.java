@@ -26,7 +26,11 @@ public class ProductListItemComponent extends AbstractUIObject {
     }
 
     public double getItemPrice() {
-        return Double.parseDouble(price.getText().replace("$", "").trim());
+        try {
+            return Double.parseDouble(price.getText().replace("$", "").trim());
+        } catch (NumberFormatException e) {
+            throw new RuntimeException("Failed to parse price: " + price.getText(), e);
+        }
     }
 
     public void clickAddToCart() {
