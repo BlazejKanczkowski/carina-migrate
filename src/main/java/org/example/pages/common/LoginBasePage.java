@@ -1,13 +1,12 @@
-package org.example.pages;
+package org.example.pages.common;
 
-import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import org.example.enums.UserCredentials;
+import org.example.pages.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
-
-public class LoginPage extends BasePage {
+public class LoginBasePage extends BasePage {
 
     @FindBy(id = "user-name")
     private ExtendedWebElement usernameField;
@@ -21,11 +20,11 @@ public class LoginPage extends BasePage {
     @FindBy(css = "h3[data-test='error']")
     private ExtendedWebElement errorMessage;
 
-    public LoginPage(WebDriver driver) {
+    public LoginBasePage(WebDriver driver) {
         super(driver);
     }
 
-    public InventoryPage login(UserCredentials user) {
+    public InventoryBasePage login(UserCredentials user) {
         return login(user.getUsername(), user.getPassword());
     }
 
@@ -37,11 +36,11 @@ public class LoginPage extends BasePage {
         return errorMessage.getText();
     }
 
-    public InventoryPage login(String username, String password) {
+    public InventoryBasePage login(String username, String password) {
         usernameField.type(username);
         passwordField.type(password);
         loginButton.click();
-        return new InventoryPage(getDriver());
+        return new InventoryBasePage(getDriver());
     }
 
     public boolean isLoginButtonDisplayed() {

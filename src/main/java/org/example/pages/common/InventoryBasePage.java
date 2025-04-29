@@ -1,8 +1,8 @@
-package org.example.pages;
+package org.example.pages.common;
 
-import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import org.example.components.ProductListItemComponent;
+import org.example.pages.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -12,8 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.example.enums.SortOption;
 
-
-public class InventoryPage extends BasePage {
+public class InventoryBasePage extends BasePage {
 
     @FindBy(xpath = "//span[contains(@data-test,'title')]")
     private ExtendedWebElement pageTitle;
@@ -37,7 +36,7 @@ public class InventoryPage extends BasePage {
     private List<ProductListItemComponent> productItems;
 
 
-    public InventoryPage(WebDriver driver) {
+    public InventoryBasePage(WebDriver driver) {
         super(driver);
     }
 
@@ -51,9 +50,9 @@ public class InventoryPage extends BasePage {
                 .collect(Collectors.toList());
     }
 
-    public CartPage clickCartIcon() {
+    public CartBasePage clickCartIcon() {
         cartIcon.click();
-        return new CartPage(getDriver());
+        return new CartBasePage(getDriver());
     }
 
     public void addProductToCartByName(String productName) {

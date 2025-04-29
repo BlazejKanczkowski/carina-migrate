@@ -26,10 +26,14 @@ public class ProductListItemComponent extends AbstractUIObject {
     }
 
     public double getItemPrice() {
+        String priceText = price.getText();
+        if (priceText == null || priceText.isEmpty()) {
+            throw new RuntimeException("Price text is null or empty for product item.");
+        }
         try {
-            return Double.parseDouble(price.getText().replace("$", "").trim());
+            return Double.parseDouble(priceText.replace("$", "").trim());
         } catch (NumberFormatException e) {
-            throw new RuntimeException("Failed to parse price: " + price.getText(), e);
+            throw new RuntimeException("Failed to parse price: " + priceText, e);
         }
     }
 
