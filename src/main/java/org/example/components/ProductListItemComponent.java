@@ -5,6 +5,9 @@ import com.zebrunner.carina.webdriver.gui.AbstractUIObject;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.time.Duration;
 
 public class ProductListItemComponent extends AbstractUIObject {
 
@@ -38,6 +41,7 @@ public class ProductListItemComponent extends AbstractUIObject {
     }
 
     public void clickAddToCart() {
+        addToCartButton.waitUntil(ExpectedConditions.elementToBeClickable(addToCartButton.getElement()), Duration.ofSeconds(5));
         addToCartButton.click();
     }
 }
