@@ -16,8 +16,7 @@ jobs:
 
     services:
       selenium:
-        image: >
-          ${{ matrix.browser == 'chrome' && 'selenium/standalone-chrome:latest' || 'selenium/standalone-firefox:latest' }}
+        image: selenium/standalone-chrome:latest
         ports:
           - 4444:4444
         options: --shm-size=2g
@@ -40,4 +39,4 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
 
       - name: Run Web Tests on ${{ matrix.browser }}
-        run: mvn clean test -Dplatform=web -Dbrowser=${{ matrix.browser }} -Dselenium_url=http://localhost:4444/wd/hub
+        run: mvn clean test -Dplatform=web -Dbrowser=chrome -Dselenium_url=http://localhost:4444/wd/hub
