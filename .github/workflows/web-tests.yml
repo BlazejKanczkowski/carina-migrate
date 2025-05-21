@@ -38,5 +38,5 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
 
-      - name: Run Web Tests on ${{ matrix.browser }}
+      - name: Run Web Tests on Chrome
         run: mvn clean test -Dplatform=web -Dbrowser=chrome -Dselenium_url=http://localhost:4444/wd/hub
