@@ -16,11 +16,11 @@ jobs:
 
     services:
       selenium:
-        image: selenium/standalone-${{ matrix.browser }}
+        image: >
+          ${{ matrix.browser == 'chrome' && 'selenium/standalone-chrome:latest' || 'selenium/standalone-firefox:latest' }}
         ports:
           - 4444:4444
-        options: >-
-          --shm-size=2g
+        options: --shm-size=2g
 
     steps:
       - name: Checkout code
