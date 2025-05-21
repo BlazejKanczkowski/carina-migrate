@@ -1,0 +1,43 @@
+name: Run Web Tests on pull request
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    name: Run Carina Web Tests
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        browser: [chrome, firefox]
+
+    services:
+      selenium:
+        image: selenium/standalone-${{ matrix.browser }}
+        ports:
+          - 4444:4444
+        options: >-
+          --shm-size=2g
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'corretto'
+          java-version: '24'
+
+      - name: Cache Maven dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+
+      - name: Run Web Tests on ${{ matrix.browser }}
+        run: mvn clean test -Dplatform=web -Dbrowser=${{ matrix.browser }} -Dselenium_url=http://localhost:4444/wd/hub
