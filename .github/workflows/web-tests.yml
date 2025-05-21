@@ -10,10 +10,6 @@ jobs:
     name: Run Carina Web Tests
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        browser: [chrome, firefox]
-
     services:
       selenium:
         image: selenium/standalone-chrome:latest
