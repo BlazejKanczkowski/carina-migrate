@@ -63,6 +63,7 @@ jobs:
             -DsuiteXmlFile=src/test/testing_suites/testng.xml \
             -Dplatform=web \
             -Dbrowser=chrome \
+            -Durl=https://www.saucedemo.com/ \
             -Dselenium_url=http://localhost:4444/wd/hub \
             "-Dcapabilities.chromeArgs=--disable-popup-blocking,--disable-blink-features=AutomationControlled,--disable-features=AutofillServerCommunication,PasswordManagerEnableAutosignin,--disable-notifications,$HEADLESS_FLAG" \
             -Dthread.count=${{ inputs.thread-number }}
