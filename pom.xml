@@ -65,31 +65,23 @@
             <version>1.2.12</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/com.zebrunner/agent-core
-        <dependency>
-            <groupId>com.zebrunner</groupId>
-            <artifactId>agent-core</artifactId>
-            <version>1.9.8</version>
-        </dependency>
-                           -->
-
         <dependency>
             <groupId>com.zebrunner</groupId>
             <artifactId>agent-core</artifactId>
             <version>1.10.0</version>
         </dependency>
+
         <dependency>
             <groupId>com.zebrunner</groupId>
             <artifactId>agent-testng-pluggable</artifactId>
             <version>1.10.0</version>
         </dependency>
+
         <dependency>
             <groupId>com.zebrunner</groupId>
             <artifactId>agent-testng</artifactId>
             <version>1.10.0</version>
         </dependency>
-
-
     </dependencies>
 
     <build>
