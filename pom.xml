@@ -65,11 +65,11 @@
             <version>1.2.12</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/com.epam.reportportal/agent-java-testng -->
+        <!-- https://mvnrepository.com/artifact/com.zebrunner/agent-testng -->
         <dependency>
-            <groupId>com.epam.reportportal</groupId>
-            <artifactId>agent-java-testng</artifactId>
-            <version>5.4.0</version>
+            <groupId>com.zebrunner</groupId>
+            <artifactId>agent-testng</artifactId>
+            <version>1.9.8</version>
         </dependency>
     </dependencies>
 
