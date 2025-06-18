@@ -76,7 +76,7 @@
         <dependency>
             <groupId>com.zebrunner</groupId>
             <artifactId>agent-core</artifactId>
-            <version>1.9.4</version>
+            <version>1.9.8</version>
         </dependency>
     </dependencies>
 
