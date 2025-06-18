@@ -62,12 +62,14 @@ jobs:
             HEADLESS_FLAG="--headless"
           fi
 
-          echo "TOKEN=$ZEBRUNNER_REPORTING_ACCESS_TOKEN"
           mvn clean test \
             -DsuiteXmlFile=src/test/testing_suites/testng.xml \
             -Dplatform=web \
             -Dbrowser=chrome \
             -Dselenium_url=http://localhost:4444/wd/hub \
-            "-Dcapabilities.chromeArgs=--disable-popup-blocking,--disable-blink-features=AutomationControlled,--disable-features=AutofillServerCommunication,PasswordManagerEnableAutosignin,--disable-notifications,$HEADLESS_FLAG" \
-            -Dthread.count=${{ inputs.thread-number }}
-      
+            -Dreporting.enabled=true \
+            -Dreporting.project-key=BLAZEJ \
+            -Dreporting.run.display-name="GitHub CI Run #${{ github.run_number }}" \
+            -Dreporting.run.environment="GitHub Actions" \
+            -Dreporting.server.hostname=https://solvdinternal.zebrunner.com \
+            -Dreporting.server.access-token=${{ secrets.ZEBRUNNER_TOKEN }}
