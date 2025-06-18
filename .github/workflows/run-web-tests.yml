@@ -1,0 +1,60 @@
+name: Run Web Tests
+
+on:
+  workflow_call:
+    inputs:
+      git-branch:
+        required: true
+        type: string
+      run-headless:
+        required: true
+        type: boolean
+      thread-number:
+        required: true
+        type: string
+
+jobs:
+  web-test:
+    name: Web UI Tests - Chrome
+    runs-on: ubuntu-latest
+
+    services:
+      selenium:
+        image: selenium/standalone-chrome:latest
+        ports:
+          - 4444:4444
+        options: --shm-size=2g
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.git-branch }}
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'corretto'
+          java-version: '24'
+
+      - name: Cache Maven dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+
+      - name: Run TestNG suite
+        run: |
+          HEADLESS_FLAG=""
+          if [ "${{ inputs.run-headless }}" = "true" ]; then
+            HEADLESS_FLAG="--headless"
+          fi
+
+          mvn clean test \
+            -DsuiteXmlFile=src/test/testing_suites/testng.xml \
+            -Dplatform=web \
+            -Dbrowser=chrome \
+            -Dselenium_url=http://localhost:4444/wd/hub \
+            "-Dcapabilities.chromeArgs=--disable-popup-blocking,--disable-blink-features=AutomationControlled,--disable-features=AutofillServerCommunication,PasswordManagerEnableAutosignin,--disable-notifications,$HEADLESS_FLAG" \
+            -Dthread.count=${{ inputs.thread-number }}
