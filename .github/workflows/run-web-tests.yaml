@@ -62,6 +62,7 @@ jobs:
             HEADLESS_FLAG="--headless"
           fi
 
+          echo "TOKEN=$ZEBRUNNER_REPORTING_ACCESS_TOKEN"
           mvn clean test \
             -DsuiteXmlFile=src/test/testing_suites/testng.xml \
             -Dplatform=web \
