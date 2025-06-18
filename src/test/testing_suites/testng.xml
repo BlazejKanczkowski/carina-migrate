@@ -1,8 +1,8 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Grid Suite" parallel="classes" thread-count="8">
-
-    <test name="Chrome Tests">
+<suite name="Grid Suite" parallel="tests" thread-count="${thread.count}" preserve-order="true">
+    <test name="Chrome Tests" verbose="2">
         <parameter name="browser" value="chrome"/>
+        <parameter name="driver_type" value="SELENIUM"/>
         <classes>
             <class name="tests.AddMultipleItemsTest"/>
             <class name="tests.AddToCartTest"/>
@@ -14,8 +14,22 @@
         </classes>
     </test>
 
-    <test name="Firefox Tests">
+    <test name="Firefox Tests" verbose="2">
         <parameter name="browser" value="firefox"/>
+        <parameter name="driver_type" value="SELENIUM"/>
+        <classes>
+            <class name="tests.AddMultipleItemsTest"/>
+            <class name="tests.AddToCartTest"/>
+            <class name="tests.CheckoutTest"/>
+            <class name="tests.LockedOutUserTest"/>
+            <class name="tests.LoginTest"/>
+            <class name="tests.LogoutTest"/>
+            <class name="tests.SortProductsTest"/>
+        </classes>
+    </test>
+
+    <test name="Android Tests" verbose="2">
+        <parameter name="driver_type" value="APPIUM"/>
         <classes>
             <class name="tests.AddMultipleItemsTest"/>
             <class name="tests.AddToCartTest"/>

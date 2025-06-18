@@ -1,10 +1,11 @@
-package org.example.pages;
+package org.example.pages.common;
 
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
+import org.example.pages.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
-public class CheckoutPage extends BasePage {
+public class CheckoutBasePage extends BasePage {
 
     @FindBy(id = "first-name")
     private ExtendedWebElement firstNameField;
@@ -24,7 +25,7 @@ public class CheckoutPage extends BasePage {
     @FindBy(className = "complete-header")
     private ExtendedWebElement confirmationMessage;
 
-    public CheckoutPage(WebDriver driver) {
+    public CheckoutBasePage(WebDriver driver) {
         super(driver);
     }
 

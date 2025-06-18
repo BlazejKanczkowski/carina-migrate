@@ -1,7 +1,7 @@
 package tests;
 
 import org.example.enums.UserCredentials;
-import org.example.pages.LoginPage;
+import org.example.pages.common.LoginBasePage;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
@@ -9,8 +9,7 @@ public class LockedOutUserTest extends BaseTest {
 
     @Test
     public void testLoginWithLockedOutUser() {
-
-        LoginPage loginPage = new LoginPage(getDriver());
+        LoginBasePage loginPage = initPage(getDriver(), LoginBasePage.class);
         loginPage.open();
         loginPage.login(UserCredentials.LOCKED_OUT_USER);
 

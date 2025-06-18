@@ -5,6 +5,9 @@ import com.zebrunner.carina.webdriver.gui.AbstractUIObject;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.time.Duration;
 
 public class ProductListItemComponent extends AbstractUIObject {
 
@@ -26,14 +29,19 @@ public class ProductListItemComponent extends AbstractUIObject {
     }
 
     public double getItemPrice() {
+        String priceText = price.getText();
+        if (priceText == null || priceText.isEmpty()) {
+            throw new RuntimeException("Price text is null or empty for product item.");
+        }
         try {
-            return Double.parseDouble(price.getText().replace("$", "").trim());
+            return Double.parseDouble(priceText.replace("$", "").trim());
         } catch (NumberFormatException e) {
-            throw new RuntimeException("Failed to parse price: " + price.getText(), e);
+            throw new RuntimeException("Failed to parse price: " + priceText, e);
         }
     }
 
     public void clickAddToCart() {
+        addToCartButton.waitUntil(ExpectedConditions.elementToBeClickable(addToCartButton.getElement()), Duration.ofSeconds(5));
         addToCartButton.click();
     }
 }
