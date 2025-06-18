@@ -53,6 +53,9 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
 
       - name: Run TestNG suite
+        env:
+          BUILD_NUMBER: ${{ github.run_number }}
+          ZEBRUNNER_REPORTING_ACCESS_TOKEN: ${{ secrets.ZEBRUNNER_TOKEN }}
         run: |
           HEADLESS_FLAG=""
           if [ "${{ inputs.run-headless }}" = "true" ]; then
@@ -66,3 +69,4 @@ jobs:
             -Dselenium_url=http://localhost:4444/wd/hub \
             "-Dcapabilities.chromeArgs=--disable-popup-blocking,--disable-blink-features=AutomationControlled,--disable-features=AutofillServerCommunication,PasswordManagerEnableAutosignin,--disable-notifications,$HEADLESS_FLAG" \
             -Dthread.count=${{ inputs.thread-number }}
+      
