@@ -1,0 +1,69 @@
+name: Run Web Tests
+
+on:
+  workflow_call:
+    inputs:
+      git-branch:
+        required: true
+        type: string
+      run-headless:
+        required: true
+        type: boolean
+      thread-number:
+        required: true
+        type: string
+
+jobs:
+  web-test:
+    name: Web UI Tests - Chrome
+    runs-on: ubuntu-latest
+
+    env:
+      ZEBRUNNER_REPORTING_ENABLED: true
+      ZEBRUNNER_REPORTING_PROJECT_KEY: BLAZEJ
+      ZEBRUNNER_REPORTING_RUN_DISPLAY_NAME: "GitHub CI Run #${{ github.run_number }}"
+      ZEBRUNNER_REPORTING_RUN_ENVIRONMENT: "GitHub Actions"
+      ZEBRUNNER_REPORTING_SERVER_HOSTNAME: "https://solvdinternal.zebrunner.com"
+      ZEBRUNNER_REPORTING_ACCESS_TOKEN: ${{ secrets.ZEBRUNNER_TOKEN }}
+
+    services:
+      selenium:
+        image: selenium/standalone-chrome:latest
+        ports:
+          - 4444:4444
+        options: --shm-size=2g
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.git-branch }}
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'corretto'
+          java-version: '24'
+
+      - name: Cache Maven dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+
+      - name: Run TestNG suite
+        run: |
+          HEADLESS_FLAG=""
+          if [ "${{ inputs.run-headless }}" = "true" ]; then
+            HEADLESS_FLAG="--headless"
+          fi
+
+          mvn clean test \
+            -DsuiteXmlFile=src/test/testing_suites/testng.xml \
+            -Dplatform=web \
+            -Dbrowser=chrome \
+            -Durl=https://www.saucedemo.com/ \
+            -Dselenium_url=http://localhost:4444/wd/hub \
+            "-Dcapabilities.chromeArgs=--disable-popup-blocking,--disable-blink-features=AutomationControlled,--disable-features=AutofillServerCommunication,PasswordManagerEnableAutosignin,--disable-notifications,$HEADLESS_FLAG" \
+            -Dthread.count=${{ inputs.thread-number }}

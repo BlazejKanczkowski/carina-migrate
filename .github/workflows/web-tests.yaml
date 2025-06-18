@@ -1,0 +1,31 @@
+name: Web Test Runner
+
+on:
+  pull_request:
+    branches:
+      - main
+  schedule:
+    - cron: '10 10 * * 2-6'
+  workflow_dispatch:
+    inputs:
+      git-branch:
+        description: "Branch to test"
+        type: string
+        default: "main"
+      run-headless:
+        description: "Run Chrome in headless mode"
+        type: boolean
+        default: true
+      thread-number:
+        description: "Parallel thread count for TestNG"
+        type: string
+        default: "4"
+
+jobs:
+  run-web-ui-tests:
+    uses: ./.github/workflows/run-web-tests.yaml
+    with:
+      git-branch: "${{ inputs.git-branch || 'github-actions-web-tests' }}"
+      run-headless: ${{ inputs.run-headless || true }}
+      thread-number: "${{ inputs.thread-number || '4' }}"
+    secrets: inherit
