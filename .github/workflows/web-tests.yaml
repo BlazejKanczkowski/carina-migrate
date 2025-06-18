@@ -25,7 +25,7 @@ jobs:
   run-web-ui-tests:
     uses: ./.github/workflows/run-web-tests.yaml
     with:
-      git-branch: "${{ inputs.git-branch || 'task6' }}"
+      git-branch: "${{ inputs.git-branch || 'main' }}"
       run-headless: ${{ inputs.run-headless || true }}
       thread-number: "${{ inputs.thread-number || '5' }}"
     secrets: inherit
