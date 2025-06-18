@@ -18,6 +18,14 @@ jobs:
     name: Web UI Tests - Chrome
     runs-on: ubuntu-latest
 
+    env:
+      ZEBRUNNER_REPORTING_ENABLED: true
+      ZEBRUNNER_REPORTING_PROJECT_KEY: BLAZEJ
+      ZEBRUNNER_REPORTING_RUN_DISPLAY_NAME: "GitHub CI Run #${{ github.run_number }}"
+      ZEBRUNNER_REPORTING_RUN_ENVIRONMENT: "GitHub Actions"
+      ZEBRUNNER_REPORTING_SERVER_HOSTNAME: "https://solvdinternal.zebrunner.com"
+      ZEBRUNNER_REPORTING_ACCESS_TOKEN: ${{ secrets.ZEBRUNNER_TOKEN }}
+
     services:
       selenium:
         image: selenium/standalone-chrome:latest

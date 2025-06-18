@@ -58,6 +58,14 @@
             <artifactId>carina-webdriver</artifactId>
             <version>1.2.12</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.epam.reportportal/agent-java-testng -->
+        <dependency>
+            <groupId>com.epam.reportportal</groupId>
+            <artifactId>agent-java-testng</artifactId>
+            <version>5.4.0</version>
+        </dependency>
+        
     </dependencies>
 
     <properties>
