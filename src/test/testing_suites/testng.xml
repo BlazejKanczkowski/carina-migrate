@@ -40,4 +40,8 @@
             <class name="tests.SortProductsTest"/>
         </classes>
     </test>
+
+    <listeners>
+        <listener class-name="com.zebrunner.agent.testng.listener.TestRunListener"/>
+    </listeners>
 </suite>
