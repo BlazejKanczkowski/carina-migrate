@@ -5,7 +5,7 @@ on:
     branches:
       - main
   schedule:
-    - cron: '10 10 * * 2-6'  # 12:10 CEST (10:10 UTC)
+    - cron: '10 10 * * 2-6'
   workflow_dispatch:
     inputs:
       git-branch:
@@ -19,7 +19,7 @@ on:
       thread-number:
         description: "Parallel thread count for TestNG"
         type: string
-        default: "5"
+        default: "4"
 
 jobs:
   run-web-ui-tests:
@@ -27,5 +27,5 @@ jobs:
     with:
       git-branch: "${{ inputs.git-branch || 'main' }}"
       run-headless: ${{ inputs.run-headless || true }}
-      thread-number: "${{ inputs.thread-number || '5' }}"
+      thread-number: "${{ inputs.thread-number || '4' }}"
     secrets: inherit
