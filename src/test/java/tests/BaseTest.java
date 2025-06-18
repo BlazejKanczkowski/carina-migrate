@@ -4,17 +4,20 @@ import com.zebrunner.carina.core.AbstractTest;
 import com.zebrunner.carina.webdriver.IDriverPool;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 import org.example.utils.ConfigUtils;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public abstract class BaseTest extends AbstractTest implements IDriverPool {
 
     @BeforeMethod
-    public void setUp() {
-        String driverType = System.getProperty("driver_type", ConfigUtils.getOrDefault("driver_type", "SELENIUM"));
+    @Parameters({"driver_type"})
+    public void setUp(@Optional("SELENIUM") String driverType) {
         String seleniumUrl = ConfigUtils.getOrDefault("selenium_url", "http://localhost:4444/");
         System.setProperty("selenium_url", seleniumUrl);
 
@@ -48,7 +51,6 @@ public abstract class BaseTest extends AbstractTest implements IDriverPool {
 
     private void setUpSeleniumDriver() {
         ChromeOptions options = new ChromeOptions();
-
         options.addArguments("--remote-allow-origins=*");
         options.addArguments("--no-first-run");
         options.addArguments("--no-default-browser-check");
