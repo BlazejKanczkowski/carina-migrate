@@ -16,7 +16,7 @@ Thumbs.db
 # TestNG reports
 test-output/
 surefire-reports/
-resources
+
 
 # Screenshots and HTML reports
 **/*.png
