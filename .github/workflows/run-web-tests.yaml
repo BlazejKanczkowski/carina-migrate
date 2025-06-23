@@ -15,6 +15,7 @@ on:
 
 jobs:
   web-test:
+    timeout-minutes: 15
     name: Web UI Tests - Chrome
     runs-on: ubuntu-latest
 
