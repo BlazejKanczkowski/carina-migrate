@@ -38,6 +38,7 @@ public class InventoryBasePage extends BasePage {
 
     public InventoryBasePage(WebDriver driver) {
         super(driver);
+        setPageURL("inventory.html");
     }
 
     public void sortBy(SortOption option) {
